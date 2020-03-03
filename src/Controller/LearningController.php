@@ -4,17 +4,22 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class LearningController extends AbstractController
 {
     /**
-     * @Route("/learning", name="learning")
+     * @Route("/learning", name="learning", methods={"GET"})
      */
-    public function index()
+
+    public function index(Request $request)
     {
+        $value = $request->request->get('name');
+
         return $this->render('learning/index.html.twig', [
             'controller_name' => 'LearningController',
-            'lorem'=>""
+            'lorem'=>"" ?? "unknown"
         ]);
     }
     /**
