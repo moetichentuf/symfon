@@ -14,10 +14,28 @@ class AboutMe
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private $name = "unknown";
 
-    public function getId(): ?int
+    public function showName(): string
     {
-        return $this->id;
+        return $this->name;
+
+    }
+    public function typedName(): string
+    {
+        if(isset($_POST['name'])){
+            $_SESSION['TheName']=$_POST['name'];
+           $this->name= $_POST['name'];
+        }
+        elseif (isset($_SESSION['TheName'])){
+
+            $this->name=$_SESSION['TheName'];
+        }
+    else{
+
+        $this->name= $this->showName();
+    }
+
+        return $this->name;
     }
 }
